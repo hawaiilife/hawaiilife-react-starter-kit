@@ -1,0 +1,6 @@
+{
+  "name": "MortgageCalculator",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MortgageCalculator.js"
+}
