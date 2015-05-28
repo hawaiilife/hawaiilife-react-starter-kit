@@ -20,7 +20,11 @@
     "jade": "1.9.2",
     "lodash": "3.6.0",
     "react": "0.13.1",
-    "superagent": "1.2.0"
+    "react-d3-components": "0.4.8",
+    "react-googlemaps": "^0.4.0",
+    "reactify": "^1.1.1",
+    "superagent": "1.2.0",
+    "react-slider": "^0.4.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",

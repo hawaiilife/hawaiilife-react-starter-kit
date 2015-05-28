@@ -14,42 +14,27 @@ import assign from 'react/lib/Object.assign';
 
 var CHANGE_EVENT = 'change';
 
-var price = 200000;
-var percentDownPayment = 10.0;
-var interest = 1.5;
-var duration = 30;
-var monthlyPayment = -1;
-var totalInterest = -1;
-var totalCost = -1;
+var mortgageInputs = {
+  price: 200000,
+  percentDownPayment: 10.0,
+  interest: 1.5,
+  duration: 30
+};
+
+var mortgageOutputs = null;
 
 var MortgageCalculatorStore = assign({}, EventEmitter.prototype, {
 
-  getMonthlyPayment() {
-    if (monthlyPayment == -1) {
-      calculateMonthlyPayment();
+  getMortgageOutputs() {
+    if (mortgageOutputs == null) {
+      mortgageOutputs = {};
+      calculateMortgageOutputs();
     }
-    return monthlyPayment;
-  },
-
-  getTotalInterest() {
-    if (totalInterest == -1) {
-      calculateTotalInterest();
-    }
-    return totalInterest;
-  },
-
-  getTotalCost() {
-    if (totalCost == -1) {
-      calculateTotalCost();
-    }
-    return totalCost;
+    return mortgageOutputs;
   },
 
   getMortgageInputs() {
-    return {price: price,
-      percentDownPayment: percentDownPayment,
-      interest: interest,
-      duration: duration };
+    return mortgageInputs;
   },
 
   emitChange() {
@@ -71,52 +56,48 @@ MortgageCalculatorStore.dispatcherToken = Dispatcher.register((payload) => {
 
   switch (action.actionType) {
     case ActionTypes.MORTGAGE_INPUTS_CHANGED:
-
-      price = action.mortgageInputs.price;
-      interest = action.mortgageInputs.interest;
-      percentDownPayment = action.mortgageInputs.percentDownPayment;
-      duration = action.mortgageInputs.duration;
-
-      calculateMonthlyPayment();
-      calculateTotalInterest();
-      calculateTotalCost();
-
+      mortgageInputs = action.mortgageInputs;
+      calculateMortgageOutputs();
       MortgageCalculatorStore.emitChange();
-    break;
+      break;
     default:
   }
 });
 
 function totalOwed() {
-  return Math.max(price - price*percentDownPayment/100, 0);
+  return Math.max(mortgageInputs.price - mortgageInputs.price * mortgageInputs.percentDownPayment / 100, 0);
 }
 
 function calculateTotalInterest() {
-  totalInterest = (monthlyPayment * duration * 12) - totalOwed();
+  mortgageOutputs.totalInterest = ( mortgageOutputs.monthlyPayment * mortgageInputs.duration * 12) - totalOwed();
 }
 
 function calculateTotalCost() {
-  totalCost = (monthlyPayment * duration * 12);
+  mortgageOutputs.totalCost = ( mortgageOutputs.monthlyPayment * mortgageInputs.duration * 12);
 }
 
 function calculateMonthlyPayment() {
-  const monthlyInterest = interest / 100 / 12;
-  const numPeriods = duration * 12;
+  const monthlyInterest = mortgageInputs.interest / 100 / 12;
+  const numPeriods = mortgageInputs.duration * 12;
 
-  if (duration == 0) {
-    monthlyPayment = totalOwed();
+  if (mortgageInputs.duration == 0) {
+    mortgageOutputs.monthlyPayment = totalOwed();
   }
-  else if (monthlyInterest == 0)
-  {
-    monthlyPayment = totalOwed()/numPeriods;
+  else if (monthlyInterest == 0) {
+    mortgageOutputs.monthlyPayment = totalOwed() / numPeriods;
   }
-  else
-  {
-    monthlyPayment = totalOwed() *
+  else {
+    mortgageOutputs.monthlyPayment = totalOwed() *
       ((monthlyInterest * Math.pow(1 + monthlyInterest, numPeriods)) /
       (Math.pow(1 + monthlyInterest, numPeriods) - 1));
   }
+}
 
+function calculateMortgageOutputs() {
+  calculateMonthlyPayment();
+  calculateTotalInterest();
+  calculateTotalCost();
+  mortgageOutputs.downPayment = mortgageInputs.percentDownPayment / 100 * mortgageInputs.price;
 }
 
 export default MortgageCalculatorStore;
