@@ -16,7 +16,7 @@ import MortgageCalculator from '../MortgageCalculator';
 import ContentPage from '../ContentPage';
 import NotFoundPage from '../NotFoundPage';
 import setViewport from './setViewport';
-
+import D3Test from '../D3Test';
 
 class App {
 
@@ -40,7 +40,7 @@ class App {
 
   shouldComponentUpdate(nextProps) {
     return this.props.path !== nextProps.path ||
-           this.props.viewport !== nextProps.viewport;
+      this.props.viewport !== nextProps.viewport;
   }
 
   render() {
@@ -56,16 +56,15 @@ class App {
     return (
       <div className="App">
         <Navbar />
-        <MortgageCalculator/>
-       {
-          this.props.path === '/' ?
-            <div className="container">
 
-            </div> :
-            <div className="container">
-              <h2>{page.title}</h2>
-            </div>
-        }
+        <div className='test-container'>
+          <div className='cell'>
+            <MortgageCalculator />
+          </div>
+          <div className='cell'>
+            <D3Test />
+          </div>
+        </div>
       </div>
     );
   }
@@ -126,7 +125,6 @@ class App {
       AppActions.navigateTo(path);
     });
   }
-
 }
 
 export default setViewport(App);
