@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MortgageCalculator.iml" filepath="$PROJECT_DIR$/.idea/MortgageCalculator.iml" />
+      <module fileurl="file://$USER_HOME$/work/HawaiiLife/Web/hawaiilife-react-starter-kit/.idea/hawaiilife-react-starter-kit.iml" filepath="$USER_HOME$/work/HawaiiLife/Web/hawaiilife-react-starter-kit/.idea/hawaiilife-react-starter-kit.iml" />
     </modules>
   </component>
 </project>
