@@ -1,3 +1,21 @@
+# hawaiilife-react-starter-kit
+
+I am using this to test React / Flux It uses the starter kit (below).
+
+
+Components
+
+```
+-MortgageCalculator - flux mortgage Calculator
+-D3Test: D3 React tests charts and stuff
+-RemotePushIOSDashboard: Work in progress. Allows you to send push from server to devices.
+
+```
+
+
+
+
+
 # React / Flux &nbsp;Starter Kit
 
 [![Build Status](http://img.shields.io/travis/kriasoft/react-starter-kit/master.svg?style=flat)](http://travis-ci.org/kriasoft/react-starter-kit)
