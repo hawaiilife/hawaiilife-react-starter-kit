@@ -1,0 +1,6 @@
+{
+  "name": "RemotePushIOSDashboard",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./RemotePushIOSDashboard.js"
+}

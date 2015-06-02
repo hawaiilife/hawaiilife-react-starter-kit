@@ -17,6 +17,7 @@ import ContentPage from '../ContentPage';
 import NotFoundPage from '../NotFoundPage';
 import setViewport from './setViewport';
 import D3Test from '../D3Test';
+import RemotePushIOSDashboard from '../RemotePushIOSDashboard';
 
 class App {
 
@@ -63,6 +64,9 @@ class App {
           </div>
           <div className='cell'>
             <D3Test />
+          </div>
+          <div className='cell'>
+            <RemotePushIOSDashboard />
           </div>
         </div>
       </div>
